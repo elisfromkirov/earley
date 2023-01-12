@@ -6,17 +6,17 @@ class Item {
  public:
   Item(const Rule& rule, size_t position, size_t left) noexcept;
 
-  const Rule& GetRule() const noexcept;
+  [[nodiscard]] const Rule& GetRule() const noexcept;
 
-  size_t GetPosition() const noexcept;
+  [[nodiscard]] size_t GetPosition() const noexcept;
 
-  size_t GetLeft() const noexcept;
+  [[nodiscard]] size_t GetLeft() const noexcept;
 
-  Symbol GetCurrentSymbol() const noexcept;
+  [[nodiscard]] Symbol GetCurrentSymbol() const noexcept;
 
-  bool IsCompleted() const noexcept;
+  [[nodiscard]] bool IsCompleted() const noexcept;
 
-  bool IsEqual(const Item& item) const noexcept;
+  [[nodiscard]] bool IsEqual(const Item& item) const noexcept;
 
  private:
   const Rule& rule_;

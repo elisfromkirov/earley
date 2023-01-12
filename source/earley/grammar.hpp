@@ -15,10 +15,10 @@ class Rule {
  public:
   Rule(NonterminalSymbol nonterminal, String product) noexcept;
 
-  NonterminalSymbol GetNonterminal() const noexcept;
+  [[nodiscard]] NonterminalSymbol GetNonterminal() const noexcept;
 
-  const String& GetProduct() const noexcept;
-  
+  [[nodiscard]] const String& GetProduct() const noexcept;
+
  private:
   NonterminalSymbol nonterminal_;
   String product_;
