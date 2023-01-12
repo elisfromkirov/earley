@@ -1,0 +1,14 @@
+# CLion cache directory
+.idea
+
+# VSCode cache directory
+.vscode
+
+# CLion CMake build directory
+cmake-build-debug
+
+# VSCode CMake build directory
+build
+
+# MacOS specific files
+.DS_Store
