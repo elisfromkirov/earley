@@ -1,27 +1,36 @@
 #include <earley/recognizer.hpp>
 
-#include <iostream>
+#include <gtest/gtest.h>
 
-int main() {
+TEST(EarleyRecognizer, CorrectBracketSequence) {
   Grammar grammar{
       Rule{'S', "U"},
       std::vector<Rule>{Rule{'U', "UU"}, Rule{'U', ""}, Rule{'U', "(U)"}}};
 
   EarleyRecognizer recognizer{grammar};
 
-  std::cout << std::boolalpha;
+  EXPECT_TRUE(recognizer.Recognize("()"));
+  EXPECT_TRUE(recognizer.Recognize("()()"));
+  EXPECT_TRUE(recognizer.Recognize("()(()())"));
+  EXPECT_TRUE(recognizer.Recognize("()((()))()"));
+  EXPECT_TRUE(recognizer.Recognize("(())()(())"));
+}
 
-  std::cout << recognizer.Recognize("()") << std::endl;
-  std::cout << recognizer.Recognize("()()") << std::endl;
-  std::cout << recognizer.Recognize("()(()())") << std::endl;
-  std::cout << recognizer.Recognize("()((()))()") << std::endl;
-  std::cout << recognizer.Recognize("(())()(())") << std::endl;
+TEST(EarleyRecognizer, IncorrectBracketSequence) {
+  Grammar grammar{
+      Rule{'S', "U"},
+      std::vector<Rule>{Rule{'U', "UU"}, Rule{'U', ""}, Rule{'U', "(U)"}}};
 
-  std::cout << recognizer.Recognize("(") << std::endl;
-  std::cout << recognizer.Recognize("(()))") << std::endl;
-  std::cout << recognizer.Recognize("(())())") << std::endl;
-  std::cout << recognizer.Recognize("())((((") << std::endl;
-  std::cout << recognizer.Recognize("((()))(()") << std::endl;
+  EarleyRecognizer recognizer{grammar};
 
-  return 0;
+  EXPECT_FALSE(recognizer.Recognize("("));
+  EXPECT_FALSE(recognizer.Recognize("(()))"));
+  EXPECT_FALSE(recognizer.Recognize("(())())"));
+  EXPECT_FALSE(recognizer.Recognize("())(((("));
+  EXPECT_FALSE(recognizer.Recognize("((()))(()"));
+}
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }

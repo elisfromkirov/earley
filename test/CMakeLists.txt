@@ -13,4 +13,5 @@ target_sources(earley_test
 target_link_libraries(earley_test
     PUBLIC
         earley
+        gtest
     )
